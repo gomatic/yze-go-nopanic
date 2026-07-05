@@ -16,3 +16,9 @@ func shadow() {
 	panic := func(string) {}
 	panic("y")
 }
+
+// parenthesized calls the built-in panic through a parenthesized expression,
+// which is legal Go and must be flagged like a bare panic call.
+func parenthesized() {
+	(panic)("boom") // want `panic is not permitted`
+}

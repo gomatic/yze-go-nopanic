@@ -48,7 +48,7 @@ func run(pass *analysis.Pass) (any, error) {
 // isBuiltinPanic reports whether call invokes the predeclared panic built-in
 // (not a shadowing local or variable named panic).
 func isBuiltinPanic(pass *analysis.Pass, call *ast.CallExpr) bool {
-	fun, ok := call.Fun.(*ast.Ident)
+	fun, ok := ast.Unparen(call.Fun).(*ast.Ident)
 	if !ok || fun.Name != "panic" {
 		return false
 	}
